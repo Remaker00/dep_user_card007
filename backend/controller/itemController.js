@@ -16,19 +16,10 @@ exports.addData = async (req, res) => {
 
 exports.getData = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const perPage = 20;
-
-    const totalItems = await Data.countDocuments();
-
-    const data = await Data.find().limit(perPage).skip((page - 1) * perPage);
-
-    const totalPages = Math.ceil(totalItems / perPage);
+    const data = await Data.find();
 
     res.json({
-      data,
-      totalItems,
-      totalPages,
+      data
     });
   } catch (error) {
     console.error('Error fetching data:', error);
